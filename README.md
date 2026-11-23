@@ -73,15 +73,3 @@ Este proyecto usa Selenium porque cumple explícitamente el criterio de la activ
 
 Para una revisión académica y autorizada con OWASP ZAP, ejecuta el escaneo únicamente contra tu propia instancia local. Empieza por el escaneo pasivo o Baseline Scan sobre `http://127.0.0.1:5000`, revisa manualmente cada alerta y guarda el informe en `seguridad/` (no se versionan por defecto credenciales ni evidencia sensible). No ejecutes pruebas activas contra servicios de terceros o sistemas sin autorización. ZAP y su instalación se gestionan aparte de las dependencias de la aplicación.
 
-## Publicación en GitHub/GitLab
-
-```powershell
-git init
-git add .
-git commit -m "feat: implementar maestro de bomberos"
-git branch -M main
-git remote add origin URL_DEL_REPOSITORIO
-git push -u origin main
-```
-
-Verifica antes de publicar que `.env` no esté incluido en el commit. La grabación de una demostración y la creación/publicación del repositorio remoto requieren realizarlas desde tu cuenta y equipo.
