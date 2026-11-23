@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#14263d">
+    <title>Maestro de Bomberos | Gestión institucional</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="/" aria-label="Maestro de Bomberos, inicio">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M17.3 2.5c1.1 5.2-3.8 6.7-2 10.1 1-1.6 2.6-2.6 4.3-3.1 4.1 4.2 6.3 7.3 5.1 12.1A9 9 0 0 1 7 19c.5-3.4 2.6-5.8 5-7.9-.3 3.2.5 4.6 2 5.4C13.4 10.6 19.7 8.6 17.3 2.5Z"/></svg>
+            </span>
+            <span><strong>MAESTRO</strong><small>CUERPO DE BOMBEROS</small></span>
+        </a>
+        <div class="topbar-meta"><span class="live-dot"></span> Panel de gestión</div>
+    </header>
+
+    <main class="page-shell">
+        <section class="page-heading">
+            <div>
+                <p class="eyebrow">ADMINISTRACIÓN · PERSONAL</p>
+                <h1>Maestro de bomberos</h1>
+                <p class="heading-copy">Gestiona el registro y estado del personal de forma clara y segura.</p>
+            </div>
+            <div class="heading-date" aria-label="Sistema de gestión">
+                <span class="date-icon" aria-hidden="true">✦</span>
+                <span><strong>Gestión institucional</strong><small>Registro de personal</small></span>
+            </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Resumen del personal">
+            <article class="stat-card">
+                <span class="stat-icon stat-icon-navy" aria-hidden="true">♙</span>
+                <div><p>Total de bomberos</p><strong id="totalBomberos">—</strong></div>
+                <span class="stat-caption">Registros</span>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon stat-icon-green" aria-hidden="true">✓</span>
+                <div><p>Personal activo</p><strong id="activosBomberos">—</strong></div>
+                <span class="stat-caption">En servicio</span>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon stat-icon-amber" aria-hidden="true">◷</span>
+                <div><p>Personal inactivo</p><strong id="inactivosBomberos">—</strong></div>
+                <span class="stat-caption">Fuera de servicio</span>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <aside class="panel form-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">FICHA DE PERSONAL</p>
+                        <h2 id="tituloFormulario">Registrar bombero</h2>
+                    </div>
+                    <span class="heading-symbol" aria-hidden="true">＋</span>
+                </div>
+                <p class="panel-description">Completa la información para incorporar un registro al maestro.</p>
+                <form id="formBombero" novalidate>
+                    <label for="dni">DNI <span class="required-mark">*</span></label>
+                    <input id="dni" name="dni" type="text" inputmode="numeric" autocomplete="off" maxlength="8" pattern="[0-9]{8}" placeholder="Ej. 12345678" required>
+                    <div class="form-row">
+                        <div>
+                            <label for="nombres">Nombres <span class="required-mark">*</span></label>
+                            <input id="nombres" name="nombres" type="text" maxlength="100" autocomplete="given-name" placeholder="Nombres" required>
+                        </div>
+                        <div>
+                            <label for="apellidos">Apellidos <span class="required-mark">*</span></label>
+                            <input id="apellidos" name="apellidos" type="text" maxlength="100" autocomplete="family-name" placeholder="Apellidos" required>
+                        </div>
+                    </div>
+                    <label for="especialidad">Especialidad <span class="required-mark">*</span></label>
+                    <select id="especialidad" name="especialidad" required>
+                        <option value="">Selecciona una especialidad</option>
+                        <option value="Rescate">Rescate</option>
+                        <option value="Incendios">Incendios</option>
+                        <option value="Primeros auxilios">Primeros auxilios</option>
+                    </select>
+                    <div class="form-actions">
+                        <button class="button button-primary" type="submit" id="btnGuardar">
+                            <span id="textoBoton">Registrar bombero</span><span aria-hidden="true">→</span>
+                        </button>
+                        <button class="button button-quiet hidden" type="button" id="btnCancelar">Cancelar</button>
+                    </div>
+                </form>
+                <div id="mensaje" class="notice hidden" role="status" aria-live="polite"></div>
+            </aside>
+
+            <section class="panel directory-panel" aria-labelledby="directorioTitulo">
+                <div class="directory-heading">
+                    <div>
+                        <p class="eyebrow">DIRECTORIO</p>
+                        <h2 id="directorioTitulo">Personal registrado</h2>
+                    </div>
+                    <span class="record-count" id="contadorRegistros">0 registros</span>
+                </div>
+                <div class="directory-tools">
+                    <label class="search-box" for="busqueda">
+                        <span aria-hidden="true">⌕</span>
+                        <input id="busqueda" type="search" placeholder="Buscar por nombre o DNI" aria-label="Buscar por nombre o DNI">
+                    </label>
+                    <label class="filter-label" for="filtroEstado">Estado</label>
+                    <select id="filtroEstado" class="filter-select" aria-label="Filtrar por estado">
+                        <option value="todos">Todos</option>
+                        <option value="activo">Activos</option>
+                        <option value="inactivo">Inactivos</option>
+                    </select>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr>
+                            <th scope="col">PERSONAL</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">ESPECIALIDAD</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col"><span class="sr-only">Acciones</span></th>
+                        </tr></thead>
+                        <tbody id="listaBomberos">
+                            <tr><td class="table-message" colspan="5">Cargando directorio…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer"><span id="resultadoBusqueda">Mostrando registros</span><button class="text-button" type="button" id="btnActualizar">Actualizar lista <span aria-hidden="true">↻</span></button></div>
+            </section>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>
