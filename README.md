@@ -71,5 +71,4 @@ La prueba abre la aplicación en modo headless, registra un bombero desde la int
 
 Este proyecto usa Selenium porque cumple explícitamente el criterio de la actividad y demuestra el flujo real. Playwright no se instala para evitar mantener dos soluciones que hacen lo mismo. Conceptualmente, Playwright suele ser más cómodo para pruebas rápidas y trazas; Selenium ofrece mayor familiaridad, compatibilidad y integración tradicional.
 
-Para una revisión académica y autorizada con OWASP ZAP, ejecuta el escaneo únicamente contra tu propia instancia local. Empieza por el escaneo pasivo o Baseline Scan sobre `http://127.0.0.1:5000`, revisa manualmente cada alerta y guarda el informe en `seguridad/` (no se versionan por defecto credenciales ni evidencia sensible). No ejecutes pruebas activas contra servicios de terceros o sistemas sin autorización. ZAP y su instalación se gestionan aparte de las dependencias de la aplicación.
 
